@@ -9,7 +9,7 @@
         public int NumberOfResidents { get; set; }
         public int Area { get; set; }       //dzivojama kvadratura
         public int LivingSpace { get; set; }    //kopeja kvadratura
-        public int HomeId { get; set; }
+        public int HomeId { get; set; }             //error here when updating database
         public Homes Home { get; set; }
         public List<Residents> Residents { get; set; }
     }
