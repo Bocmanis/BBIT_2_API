@@ -4,6 +4,7 @@ using BBIT_2_API.Models.Data;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
@@ -11,9 +12,10 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace BBIT_2_API.Migrations
 {
     [DbContext(typeof(DataContext))]
-    partial class DataContextModelSnapshot : ModelSnapshot
+    [Migration("20220507140902_AddedTableRelations")]
+    partial class AddedTableRelations
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -42,7 +44,7 @@ namespace BBIT_2_API.Migrations
                     b.Property<int>("HomeId")
                         .HasColumnType("int");
 
-                    b.Property<int>("HomesId")
+                    b.Property<int>("HomeId1")
                         .HasColumnType("int");
 
                     b.Property<int>("LivingSpace")
@@ -58,7 +60,7 @@ namespace BBIT_2_API.Migrations
 
                     b.HasIndex("HomeId");
 
-                    b.HasIndex("HomesId");
+                    b.HasIndex("HomeId1");
 
                     b.ToTable("Apartments");
                 });
@@ -107,7 +109,7 @@ namespace BBIT_2_API.Migrations
                     b.Property<int>("ApartmentId")
                         .HasColumnType("int");
 
-                    b.Property<int>("ApartmentsId")
+                    b.Property<int>("ApartmentId1")
                         .HasColumnType("int");
 
                     b.Property<DateTime>("DateOfBirth")
@@ -137,7 +139,7 @@ namespace BBIT_2_API.Migrations
 
                     b.HasIndex("ApartmentId");
 
-                    b.HasIndex("ApartmentsId");
+                    b.HasIndex("ApartmentId1");
 
                     b.ToTable("Residents");
                 });
@@ -150,13 +152,13 @@ namespace BBIT_2_API.Migrations
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.HasOne("BBIT_2_API.Homes", "Homes")
+                    b.HasOne("BBIT_2_API.Homes", "Home")
                         .WithMany("Apartments")
-                        .HasForeignKey("HomesId")
+                        .HasForeignKey("HomeId1")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.Navigation("Homes");
+                    b.Navigation("Home");
                 });
 
             modelBuilder.Entity("BBIT_2_API.Residents", b =>
@@ -167,13 +169,13 @@ namespace BBIT_2_API.Migrations
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.HasOne("BBIT_2_API.Apartments", "Apartments")
+                    b.HasOne("BBIT_2_API.Apartments", "Apartment")
                         .WithMany("Residents")
-                        .HasForeignKey("ApartmentsId")
+                        .HasForeignKey("ApartmentId1")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.Navigation("Apartments");
+                    b.Navigation("Apartment");
                 });
 
             modelBuilder.Entity("BBIT_2_API.Apartments", b =>

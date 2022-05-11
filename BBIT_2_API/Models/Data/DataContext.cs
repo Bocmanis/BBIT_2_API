@@ -7,6 +7,7 @@ namespace BBIT_2_API.Models.Data
         //might be for relations
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
+            //entity tables for relations
             modelBuilder.Entity<Apartments>()
                 .HasOne<Homes>()
                 .WithMany()

@@ -10,5 +10,7 @@
         public int Area { get; set; }       //dzivojama kvadratura
         public int LivingSpace { get; set; }    //kopeja kvadratura
         public int HomeId { get; set; }
+        public Homes Home { get; set; }
+        public List<Residents> Residents { get; set; }
     }
 }
