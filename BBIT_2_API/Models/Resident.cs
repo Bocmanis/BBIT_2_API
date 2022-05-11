@@ -1,6 +1,6 @@
 ﻿namespace BBIT_2_API
 {
-    public class Residents
+    public class Resident
     {
         public int Id { get; set; }
         public string FirstName { get; set; }
@@ -10,6 +10,6 @@
         public string Email { get; set; }
         public string PhoneNumber { get; set; }  
         public int ApartmentId { get; set; }
-        public Apartments Apartment { get; set; }
+        public Apartment Apartment { get; set; }
     }
 }

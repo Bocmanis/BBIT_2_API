@@ -24,14 +24,14 @@ namespace BBIT_2_API.Controllers
 
         // GET: api/Apartments
         [HttpGet]
-        public async Task<ActionResult<IEnumerable<Apartments>>> GetApartments()
+        public async Task<ActionResult<IEnumerable<Apartment>>> GetApartments()
         {
             return await _context.Apartments.ToListAsync();
         }
 
         // GET: api/Apartments/5
         [HttpGet("{id}")]
-        public async Task<ActionResult<Apartments>> GetApartments(int id)
+        public async Task<ActionResult<Apartment>> GetApartments(int id)
         {
             var apartments = await _context.Apartments.FindAsync(id);
 
@@ -45,7 +45,7 @@ namespace BBIT_2_API.Controllers
 
         // PUT: api/Apartments/5
         [HttpPut("{id}")]
-        public async Task<IActionResult> PutApartments(int id, Apartments apartments)
+        public async Task<IActionResult> PutApartments(int id, Apartment apartments)
         {
             if (id != apartments.Id)
             {
@@ -75,7 +75,7 @@ namespace BBIT_2_API.Controllers
 
         // POST: api/Apartments
         [HttpPost]
-        public async Task<ActionResult<Apartments>> PostApartments(Apartments apartments)
+        public async Task<ActionResult<Apartment>> PostApartments(Apartment apartments)
         {
             _context.Apartments.Add(apartments);
             await _context.SaveChangesAsync();

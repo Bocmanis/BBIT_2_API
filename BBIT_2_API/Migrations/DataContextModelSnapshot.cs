@@ -22,7 +22,7 @@ namespace BBIT_2_API.Migrations
 
             SqlServerModelBuilderExtensions.UseIdentityColumns(modelBuilder, 1L, 1);
 
-            modelBuilder.Entity("BBIT_2_API.Apartments", b =>
+            modelBuilder.Entity("BBIT_2_API.Apartment", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
@@ -42,9 +42,6 @@ namespace BBIT_2_API.Migrations
                     b.Property<int>("HomeId")
                         .HasColumnType("int");
 
-                    b.Property<int>("HomesId")
-                        .HasColumnType("int");
-
                     b.Property<int>("LivingSpace")
                         .HasColumnType("int");
 
@@ -58,12 +55,10 @@ namespace BBIT_2_API.Migrations
 
                     b.HasIndex("HomeId");
 
-                    b.HasIndex("HomesId");
-
                     b.ToTable("Apartments");
                 });
 
-            modelBuilder.Entity("BBIT_2_API.Homes", b =>
+            modelBuilder.Entity("BBIT_2_API.Home", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
@@ -96,7 +91,7 @@ namespace BBIT_2_API.Migrations
                     b.ToTable("Homes");
                 });
 
-            modelBuilder.Entity("BBIT_2_API.Residents", b =>
+            modelBuilder.Entity("BBIT_2_API.Resident", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
@@ -105,9 +100,6 @@ namespace BBIT_2_API.Migrations
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"), 1L, 1);
 
                     b.Property<int>("ApartmentId")
-                        .HasColumnType("int");
-
-                    b.Property<int>("ApartmentsId")
                         .HasColumnType("int");
 
                     b.Property<DateTime>("DateOfBirth")
@@ -137,51 +129,37 @@ namespace BBIT_2_API.Migrations
 
                     b.HasIndex("ApartmentId");
 
-                    b.HasIndex("ApartmentsId");
-
                     b.ToTable("Residents");
                 });
 
-            modelBuilder.Entity("BBIT_2_API.Apartments", b =>
+            modelBuilder.Entity("BBIT_2_API.Apartment", b =>
                 {
-                    b.HasOne("BBIT_2_API.Homes", null)
-                        .WithMany()
+                    b.HasOne("BBIT_2_API.Home", "Home")
+                        .WithMany("Apartments")
                         .HasForeignKey("HomeId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.HasOne("BBIT_2_API.Homes", "Homes")
-                        .WithMany("Apartments")
-                        .HasForeignKey("HomesId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.Navigation("Homes");
+                    b.Navigation("Home");
                 });
 
-            modelBuilder.Entity("BBIT_2_API.Residents", b =>
+            modelBuilder.Entity("BBIT_2_API.Resident", b =>
                 {
-                    b.HasOne("BBIT_2_API.Apartments", null)
-                        .WithMany()
+                    b.HasOne("BBIT_2_API.Apartment", "Apartment")
+                        .WithMany("Residents")
                         .HasForeignKey("ApartmentId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.HasOne("BBIT_2_API.Apartments", "Apartments")
-                        .WithMany("Residents")
-                        .HasForeignKey("ApartmentsId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.Navigation("Apartments");
+                    b.Navigation("Apartment");
                 });
 
-            modelBuilder.Entity("BBIT_2_API.Apartments", b =>
+            modelBuilder.Entity("BBIT_2_API.Apartment", b =>
                 {
                     b.Navigation("Residents");
                 });
 
-            modelBuilder.Entity("BBIT_2_API.Homes", b =>
+            modelBuilder.Entity("BBIT_2_API.Home", b =>
                 {
                     b.Navigation("Apartments");
                 });
